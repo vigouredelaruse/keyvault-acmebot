@@ -33,6 +33,8 @@ namespace KeyVault.Acmebot.Options
 
         public DnsMadeEasyOptions DnsMadeEasy { get; set; }
 
+        public GodaddyOptions GoDaddyOptions { get; set; }
+
         // Backward compatibility, Remove in the future
         public GoogleDnsOptions Google { get; set; }
 

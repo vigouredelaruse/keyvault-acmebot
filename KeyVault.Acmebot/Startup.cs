@@ -85,6 +85,8 @@ namespace KeyVault.Acmebot
                 var options = provider.GetRequiredService<IOptions<AcmebotOptions>>().Value;
                 var environment = provider.GetRequiredService<AzureEnvironment>();
 
+                
+
                 if (options.Cloudflare != null)
                 {
                     return new CloudflareProvider(options.Cloudflare);
@@ -93,6 +95,11 @@ namespace KeyVault.Acmebot
                 if (options.DnsMadeEasy != null)
                 {
                     return new DnsMadeEasyProvider(options.DnsMadeEasy);
+                }
+
+                if (options.GoDaddyOptions != null )
+                {
+                    return new GodaddyProvider(options.GoDaddyOptions);
                 }
 
                 if (options.GoogleDns != null || options.Google != null)
