@@ -19,6 +19,10 @@ Key Vault allows for secure and centralized management of ACME certificates.
 
 ## Announcements
 
+### Purpose of this fork
+
+this is an experimental fork that seeks to integrate godaddy as a dns provider
+
 ### Upgrade to Acmebot v3
 
 Key Vault Acmebot v3 has been released since December 31, 2019. Users deploying earlier than this are encouraged to upgrade to v3 by following the ugprade process described here:
