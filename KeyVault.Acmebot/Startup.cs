@@ -5,6 +5,7 @@ using Azure.Security.KeyVault.Certificates;
 
 using DnsClient;
 
+using KeyVault.Acmebot.client.godaddy;
 using KeyVault.Acmebot.Internal;
 using KeyVault.Acmebot.Options;
 using KeyVault.Acmebot.Providers;
@@ -80,13 +81,15 @@ namespace KeyVault.Acmebot
             builder.Services.AddSingleton<WebhookInvoker>();
             builder.Services.AddSingleton<ILifeCycleNotificationHelper, WebhookLifeCycleNotification>();
 
+            /// can't do this because this is the dependency of a singleton
+            // builder.Services.AddHttpClient<GoDaddyClient>(x => { x.BaseAddress = new Uri(GodaddyConstants.OTEEndpoint); });
+
             builder.Services.AddSingleton<IDnsProvider>(provider =>
             {
                 var options = provider.GetRequiredService<IOptions<AcmebotOptions>>().Value;
                 var environment = provider.GetRequiredService<AzureEnvironment>();
 
-                
-
+               
                 if (options.Cloudflare != null)
                 {
                     return new CloudflareProvider(options.Cloudflare);
@@ -99,6 +102,10 @@ namespace KeyVault.Acmebot
 
                 if (options.GoDaddyOptions != null )
                 {
+
+                    // default to the test-dev endpoint
+                    // discover the in use endpoint 
+
                     return new GodaddyProvider(options.GoDaddyOptions);
                 }
 
